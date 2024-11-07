@@ -1,29 +1,24 @@
 // json2html.js
 export default function json2html(data) {
-  // Start the table with the data-user attribute
-  let html = '<table data-user="pranatisreya.dama@gmail.com">';
-  
-  // Create the table header
-  html += '<thead><tr>';
-  // Check for the columns: Name, Age, Gender
-  if (data.length > 0) {
-    for (let key in data[0]) {
-      html += `<th>${key}</th>`;
-    }
-  }
-  html += '</tr></thead><tbody>';
-  
-  // Add rows for each object in the data array
-  data.forEach(row => {
-    html += '<tr>';
-    for (let key in row) {
-      html += `<td>${row[key]}</td>`;
-    }
-    html += '</tr>';
+  // Create the table element with the custom attribute data-user
+  let table = `<table data-user="pranatisreya.dama@gmail.com">
+                <thead>
+                  <tr><th>Name</th><th>Age</th><th>Gender</th></tr>
+                </thead>
+                <tbody>`;
+
+  // Iterate through each object in the data array
+  data.forEach(person => {
+    table += `<tr>
+                <td>${person.Name}</td>
+                <td>${person.Age}</td>
+                <td>${person.Gender || ''}</td>
+              </tr>`;
   });
+
+  // Close the table tags
+  table += `</tbody></table>`;
   
-  // Close the table and return the HTML string
-  html += '</tbody></table>';
-  
-  return html;
+  // Return the HTML table string
+  return table;
 }
